@@ -126,17 +126,6 @@ button { font: inherit; cursor: pointer; }
 .g-pill .g-logo { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: var(--white); }
 .g-pill b { color: var(--white); font-family: var(--font-display); }
 
-/* Faixa SOS -------------------------------------------------------------- */
-.sos-bar { background: var(--red); color: var(--white); font-size: .9rem; }
-.sos-inner { display: flex; align-items: center; justify-content: center; gap: 8px 14px; min-height: 40px; flex-wrap: wrap; padding-top: 6px; padding-bottom: 6px; text-align: center; }
-.sos-text { display: inline-flex; align-items: center; gap: 10px; opacity: .95; }
-.sos-phone { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-family: var(--font-display); text-decoration: none; letter-spacing: .01em; }
-.sos-phone .ic { width: 16px; height: 16px; }
-.sos-phone:hover { text-decoration: underline; text-underline-offset: 3px; }
-.pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--white); position: relative; flex: none; }
-.pulse-dot::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--white); opacity: 0; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
-
 /* Header ----------------------------------------------------------------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
@@ -153,14 +142,23 @@ button { font: inherit; cursor: pointer; }
 .main-nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .95rem; color: #c9ced8; transition: background-color .2s, color .2s; }
 .main-nav a:hover { background: rgba(255, 255, 255, .08); color: var(--white); }
 .main-nav .nav-cta-mobile { display: none; }
-.header-actions { display: flex; align-items: center; gap: 10px; }
+.header-actions { display: flex; align-items: center; gap: 18px; }
+.header-phone { display: inline-flex; align-items: center; gap: 8px; color: var(--white); font-weight: 700; font-size: .95rem; text-decoration: none; white-space: nowrap; }
+.header-phone .ic { width: 18px; height: 18px; color: var(--red-400); }
+.header-phone:hover { color: var(--red-400); }
 .menu-toggle { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--ink-line); background: rgba(255, 255, 255, .05); color: var(--white); align-items: center; justify-content: center; }
 .menu-toggle .ic-close { display: none; }
 .menu-toggle[aria-expanded="true"] .ic-open { display: none; }
 .menu-toggle[aria-expanded="true"] .ic-close { display: block; }
 
 /* Hero ------------------------------------------------------------------- */
-.hero { position: relative; background: var(--ink); color: var(--ink-text); overflow: hidden; padding: clamp(56px, 8vw, 100px) 0 clamp(64px, 8vw, 104px); isolation: isolate; }
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  background: var(--ink); color: var(--ink-text);
+}
 .hero-bg { position: absolute; inset: 0; z-index: -1; }
 .hero-bg::before {
   content: ""; position: absolute; inset: 0;
@@ -175,7 +173,7 @@ button { font: inherit; cursor: pointer; }
   -webkit-mask-image: linear-gradient(105deg, transparent 30%, #000 75%);
   mask-image: linear-gradient(105deg, transparent 30%, #000 75%);
 }
-.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
+.hero-grid { flex: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(48px, 6vw, 72px); }
 .hero-grid > *, .platform-layout > *, .structure-layout > *, .provider-layout > *, .proposal-layout > *, .faq-layout > * { min-width: 0; }
 .hero h1 { font-size: clamp(2.35rem, 1.3rem + 3.4vw, 3.7rem); font-weight: 800; color: var(--white); letter-spacing: -.035em; }
 .hero h1 em { font-style: normal; color: var(--red-400); position: relative; white-space: nowrap; }
@@ -214,13 +212,13 @@ button { font: inherit; cursor: pointer; }
 .quote-card figcaption { font-size: .85rem; opacity: .85; }
 
 /* Faixa de elogios ------------------------------------------------------- */
-.praise { background: var(--paper); border-bottom: 1px solid var(--line); overflow: hidden; padding: 22px 0; }
+.praise { overflow: hidden; padding: 18px 0; border-top: 1px solid var(--ink-line); background: rgba(255, 255, 255, .025); }
 .praise-track { display: flex; gap: 16px; width: max-content; animation: marquee 48s linear infinite; }
 .praise:hover .praise-track { animation-play-state: paused; }
-.praise-item { display: flex; align-items: center; gap: 12px; flex: none; padding: 12px 20px 12px 14px; background: var(--white); border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+.praise-item { display: flex; align-items: center; gap: 12px; flex: none; padding: 11px 20px 11px 14px; background: rgba(255, 255, 255, .06); border: 1px solid var(--ink-line); border-radius: 999px; white-space: nowrap; color: var(--white); }
 .praise-item .stars svg { width: 13px; height: 13px; }
 .praise-item q { font-weight: 600; quotes: "“" "”"; }
-.praise-item small { color: var(--muted); font-weight: 600; flex: none; }
+.praise-item small { color: var(--ink-muted); font-weight: 600; flex: none; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* Seções ----------------------------------------------------------------- */
@@ -433,6 +431,23 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* Responsivo ------------------------------------------------------------- */
+/* Telas baixas (notebooks 1366x768): o hero inteiro, com a faixa de elogios, cabe na primeira tela */
+@media (min-width: 1025px) and (max-height: 900px) {
+  .hero-grid { padding-top: 24px; padding-bottom: 32px; }
+  .hero h1 { font-size: 3.2rem; }
+  .hero .lead { margin-top: 16px; }
+  .hero-ctas { margin-top: 26px; }
+  .hero-nums { margin-top: 30px; padding-top: 20px; }
+  .score-card { padding: 22px 24px 50px; }
+  .score-num { font-size: 4rem; }
+  .histo { margin-top: 18px; gap: 6px; }
+  .praise { padding: 14px 0; }
+}
+
+@media (max-width: 1240px) {
+  .header-phone { display: none; }
+}
+
 @media (max-width: 1140px) {
   .main-nav a { padding: 8px 9px; font-size: .9rem; }
 }
@@ -471,19 +486,18 @@ button { font: inherit; cursor: pointer; }
   body { font-size: 16px; padding-bottom: 68px; }
   :root { --header-h: 64px; }
   .brand img { height: 38px; }
-  .sos-text { font-size: .85rem; }
-  .sos-long { display: none; }
 
   .hero-ctas .btn { flex: 1 1 0; padding: 0 16px; }
-  .hero-nums { justify-content: space-between; gap: 12px; }
-  .hero-nums b { font-size: 1.3rem; }
+  .hero-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .hero-nums b { font-size: 1.25rem; }
+  .hero-nums span { font-size: .8rem; line-height: 1.3; }
   .score-card { padding: 22px 20px 52px; }
   .score-num { font-size: 3.6rem; }
   .g-logo-lg { width: 30px; height: 30px; }
   .quote-card { margin: -32px 12px 0; padding: 18px 20px; }
   .quote-card blockquote { font-size: 1rem; }
 
-  .praise { padding: 16px 0; }
+  .praise { padding: 14px 0; }
   .praise-item { padding: 10px 16px 10px 12px; font-size: .92rem; }
   .praise-item small { display: none; }
 
