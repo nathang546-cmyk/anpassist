@@ -296,19 +296,22 @@ button { font: inherit; cursor: pointer; }
 .track-live { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 800; color: var(--red); background: var(--red-50); padding: 4px 10px; border-radius: 999px; }
 .track-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: live 1.6s infinite; }
 @keyframes live { 0% { box-shadow: 0 0 0 0 rgba(227, 20, 27, .6); } 70% { box-shadow: 0 0 0 8px rgba(227, 20, 27, 0); } 100% { box-shadow: 0 0 0 0 rgba(227, 20, 27, 0); } }
-.track-map { display: block; width: 100%; height: auto; border-radius: 16px; }
+.track-card { padding: 14px; border-radius: 16px; background: var(--paper); }
+.track-card-head { margin-bottom: 10px; line-height: 1.3; }
+.track-card-head b { font-family: var(--font-display); font-size: .95rem; }
+.track-card-head b, .track-card-head small { display: block; }
+.track-card-head small { font-size: .72rem; color: var(--muted); font-weight: 600; }
+.track-card dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 0; }
+.track-card dt { font-size: .68rem; color: var(--muted); }
+.track-card dd { margin: 0; font-size: .82rem; font-weight: 700; }
+.track-files { display: flex; gap: 8px; margin-top: 12px; }
+.track-files span { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); font-size: .75rem; font-weight: 700; color: var(--text); }
+.track-files .ic { width: 14px; height: 14px; color: var(--red); }
 .track-eta { margin-top: 14px; }
 .track-eta small { display: block; font-size: .75rem; color: var(--muted); font-weight: 600; }
 .track-eta strong { display: block; font-family: var(--font-display); font-size: 1.3rem; letter-spacing: -.02em; line-height: 1.25; }
 .track-bar { display: block; height: 5px; margin-top: 10px; border-radius: 4px; background: #eef0f3; overflow: hidden; }
 .track-bar span { display: block; height: 100%; width: 40%; border-radius: inherit; background: var(--red); transition: width .8s var(--ease); }
-.track-driver { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px; border-radius: 14px; background: var(--paper); }
-.track-driver b { display: block; font-size: .85rem; line-height: 1.2; }
-.track-driver small { display: block; font-size: .75rem; color: var(--muted); }
-.track-avatar, .track-call { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none; }
-.track-avatar { background: var(--ink); color: var(--white); }
-.track-call { margin-left: auto; background: var(--white); color: var(--red); border: 1px solid var(--line); }
-.track-avatar .ic, .track-call .ic { width: 16px; height: 16px; }
 .track-steps { display: grid; gap: 2px; margin-top: 12px; }
 .track-steps li { position: relative; display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; align-items: center; padding: 6px 4px; font-size: .82rem; color: #9aa1b0; transition: color .4s; }
 .track-steps li::before { content: ""; position: absolute; left: 12px; top: 26px; bottom: -8px; width: 2px; background: #eef0f3; }
