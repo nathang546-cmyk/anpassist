@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /_referencias/
+Disallow: /propostas/
 
 Sitemap: https://anpassistencia.com.br/sitemap.xml
