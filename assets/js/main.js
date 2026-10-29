@@ -8,6 +8,29 @@
   function waLink(msg) {
     return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
   }
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function svgUse(id, cls) {
+    var ns = "http://www.w3.org/2000/svg";
+    var s = document.createElementNS(ns, "svg");
+    if (cls) s.setAttribute("class", cls);
+    s.setAttribute("aria-hidden", "true");
+    var u = document.createElementNS(ns, "use");
+    u.setAttribute("href", "#" + id);
+    s.appendChild(u);
+    return s;
+  }
+  function estrelas(n) {
+    var s = el("span", "stars");
+    s.setAttribute("role", "img");
+    s.setAttribute("aria-label", n + " de 5 estrelas");
+    for (var i = 0; i < n; i++) s.appendChild(svgUse("i-star"));
+    return s;
+  }
 
   /* Links de WhatsApp com mensagem pronta */
   document.querySelectorAll(".js-wa[data-msg]").forEach(function (a) {
@@ -35,60 +58,99 @@
     if (nav.classList.contains("open") && !e.target.closest(".site-header")) setMenu(false);
   });
 
-  /* Avaliações */
-  var AVATAR_CORES = ["#c8262c", "#1d2230", "#2f6f4f", "#8a4b1f", "#3b4a8f", "#6b2a5c"];
+  /* Google: nota, total, distribuição e avaliações (data/google.js) */
+  var G = window.ANP_GOOGLE;
+  if (G) {
+    var nota = Number(G.nota).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    var total = Number(G.total).toLocaleString("pt-BR");
+    document.querySelectorAll('[data-g="nota"]').forEach(function (n) { n.textContent = nota; });
+    document.querySelectorAll('[data-g="total"]').forEach(function (n) { n.textContent = total; });
+
+    // A distribuição é preenchida à mão; se o total mudou e ela não, escondemos para não mostrar número errado.
+    var dist = G.distribuicao || {};
+    var soma = [5, 4, 3, 2, 1].reduce(function (acc, k) { return acc + (dist[k] || 0); }, 0);
+    var histo = document.querySelector("[data-histo]");
+    var cinco = document.querySelector("[data-g-cinco]");
+    if (soma === G.total && soma > 0) {
+      if (histo) {
+        histo.innerHTML = "";
+        [5, 4, 3, 2, 1].forEach(function (k) {
+          var li = el("li");
+          var bar = el("i");
+          bar.style.setProperty("--w", ((dist[k] || 0) / soma * 100).toFixed(1) + "%");
+          li.appendChild(el("span", null, String(k)));
+          li.appendChild(bar);
+          li.appendChild(el("b", null, String(dist[k] || 0)));
+          histo.appendChild(li);
+        });
+      }
+      if (cinco) {
+        cinco.innerHTML = "";
+        cinco.appendChild(el("b", null, (dist[5] || 0).toLocaleString("pt-BR") + " de " + total));
+        cinco.appendChild(document.createTextNode(" com 5 estrelas."));
+      }
+    } else {
+      if (histo) histo.hidden = true;
+      if (cinco) cinco.hidden = true;
+    }
+  }
+  var avaliacoes = (G && G.avaliacoes || []).filter(function (r) { return r.nome && r.texto; });
+
+  /* Mural de avaliações */
+  var CORES = ["#c8262c", "#1d2230", "#2f6f4f", "#8a4b1f", "#3b4a8f", "#6b2a5c"];
   function iniciais(nome) {
-    var partes = nome.trim().split(/\s+/);
-    var ini = partes[0][0] + (partes.length > 1 ? partes[partes.length - 1][0] : "");
-    return ini.toUpperCase();
-  }
-  function el(tag, cls, text) {
-    var n = document.createElement(tag);
-    if (cls) n.className = cls;
-    if (text != null) n.textContent = text;
-    return n;
-  }
-  function svgUse(id, cls) {
-    var ns = "http://www.w3.org/2000/svg";
-    var s = document.createElementNS(ns, "svg");
-    if (cls) s.setAttribute("class", cls);
-    s.setAttribute("aria-hidden", "true");
-    var u = document.createElementNS(ns, "use");
-    u.setAttribute("href", "#" + id);
-    s.appendChild(u);
-    return s;
+    var p = nome.trim().split(/\s+/);
+    return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase();
   }
   var lista = document.getElementById("lista-avaliacoes");
-  if (lista && window.ANP_AVALIACOES) {
-    window.ANP_AVALIACOES.forEach(function (r, i) {
+  if (lista) {
+    avaliacoes.forEach(function (r, i) {
       var card = el("article", "review reveal");
       var head = el("div", "review-head");
       var av = el("span", "avatar", iniciais(r.nome));
-      av.style.background = AVATAR_CORES[i % AVATAR_CORES.length];
+      av.style.background = CORES[i % CORES.length];
       av.setAttribute("aria-hidden", "true");
-      var who = el("div");
-      who.appendChild(el("div", "review-name", r.nome));
-      who.appendChild(el("div", "review-meta", r.detalhe ? r.detalhe + " · Google" : "Avaliação no Google"));
       head.appendChild(av);
-      head.appendChild(who);
+      head.appendChild(el("div", "review-name", r.nome));
       head.appendChild(svgUse("i-google", "g-logo"));
       card.appendChild(head);
-
-      var stars = el("span", "stars");
-      stars.setAttribute("role", "img");
-      stars.setAttribute("aria-label", "5 de 5 estrelas");
-      for (var s = 0; s < 5; s++) stars.appendChild(svgUse("i-star"));
-      card.appendChild(stars);
-
+      card.appendChild(estrelas(r.nota || 5));
       card.appendChild(el("blockquote", null, r.texto));
-      if (r.resposta) {
-        var rep = el("div", "review-reply");
-        rep.appendChild(el("b", null, "Resposta da ANP"));
-        rep.appendChild(document.createTextNode(r.resposta));
-        card.appendChild(rep);
-      }
       lista.appendChild(card);
     });
+  }
+
+  /* Faixa de elogios em movimento: repete os itens até encher a tela, depois duplica para o loop */
+  var curtas = avaliacoes.filter(function (r) { return r.texto.length <= 120; });
+  var faixa = document.querySelector("[data-marquee]");
+  if (faixa && curtas.length) {
+    var base = [];
+    while (base.length < 8) base = base.concat(curtas);
+    base.concat(base).forEach(function (r, i) {
+      var item = el("div", "praise-item");
+      if (i >= base.length) item.setAttribute("aria-hidden", "true");
+      item.appendChild(estrelas(r.nota || 5));
+      item.appendChild(el("q", null, r.texto));
+      item.appendChild(el("small", null, r.nome));
+      faixa.appendChild(item);
+    });
+  } else if (faixa) {
+    faixa.closest(".praise").hidden = true;
+  }
+
+  /* Depoimento rotativo no hero */
+  var quote = document.querySelector("[data-quote]");
+  if (quote && curtas.length > 1 && !reduceMotion) {
+    var qi = 0, qTexto = quote.querySelector("blockquote"), qAutor = quote.querySelector("figcaption");
+    setInterval(function () {
+      quote.classList.add("swap");
+      setTimeout(function () {
+        qi = (qi + 1) % curtas.length;
+        qTexto.textContent = "“" + curtas[qi].texto + "”";
+        qAutor.textContent = curtas[qi].nome + " · via Google";
+        quote.classList.remove("swap");
+      }, 450);
+    }, 5500);
   }
 
   /* Animação de entrada */
@@ -99,40 +161,16 @@
         if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    reveals.forEach(function (r, i) {
-      var irmaos = r.parentElement ? Array.prototype.indexOf.call(r.parentElement.children, r) : 0;
-      r.style.transitionDelay = Math.min(irmaos, 5) * 70 + "ms";
+    reveals.forEach(function (r) {
+      var pos = r.parentElement ? Array.prototype.indexOf.call(r.parentElement.children, r) : 0;
+      r.style.transitionDelay = Math.min(pos, 5) * 70 + "ms";
       io.observe(r);
     });
   } else {
     reveals.forEach(function (r) { r.classList.add("in"); });
   }
 
-  /* Contadores */
-  function formatar(n, dec) {
-    return n.toLocaleString("pt-BR", { minimumFractionDigits: dec, maximumFractionDigits: dec });
-  }
-  var counters = document.querySelectorAll("[data-count]");
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    var co = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        co.unobserve(en.target);
-        var node = en.target, alvo = parseFloat(node.dataset.count), dec = parseInt(node.dataset.decimals || "0", 10);
-        var t0 = null, dur = 1400;
-        function passo(t) {
-          if (!t0) t0 = t;
-          var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-          node.textContent = formatar(alvo * e, dec);
-          if (p < 1) requestAnimationFrame(passo);
-        }
-        requestAnimationFrame(passo);
-      });
-    }, { threshold: 0.6 });
-    counters.forEach(function (c) { co.observe(c); });
-  }
-
-  /* Cartão "ao vivo" do hero: percorre as etapas do atendimento */
+  /* Cartão "ao vivo" da plataforma: percorre as etapas do atendimento */
   var steps = document.querySelectorAll("[data-steps] li");
   if (steps.length) {
     var atual = 2;
@@ -178,10 +216,6 @@
         f.setAttribute("aria-invalid", String(vazio));
         if (vazio) { ok = false; primeiro = primeiro || f; }
       });
-      var email = form.querySelector('input[type="email"]');
-      if (email && email.value && !email.checkValidity()) {
-        email.classList.add("invalid"); ok = false; primeiro = primeiro || email;
-      }
       erro.hidden = ok;
       if (!ok) { primeiro.focus(); return; }
 
