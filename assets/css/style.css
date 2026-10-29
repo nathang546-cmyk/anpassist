@@ -213,8 +213,15 @@ button { font: inherit; cursor: pointer; }
 }
 .quote-card.swap { opacity: 0; transform: translateY(8px); }
 .quote-card .stars { color: var(--star); }
-.quote-card blockquote { margin: 8px 0 6px; font-size: 1.08rem; font-weight: 600; line-height: 1.45; }
-.quote-card figcaption { font-size: .85rem; opacity: .85; }
+.quote-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.quote-dots { display: flex; gap: 2px; }
+.quote-dots button { width: 22px; height: 22px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+.quote-dots button::before { content: ""; width: 7px; height: 7px; border-radius: 4px; background: rgba(255, 255, 255, .3); transition: width .3s var(--ease), background-color .3s; }
+.quote-dots button[aria-current="true"]::before { width: 18px; background: var(--white); }
+.quote-card blockquote { margin: 10px 0 12px; min-height: calc(1.45em * 4); font-size: 1.08rem; font-weight: 600; line-height: 1.45; }
+.quote-card figcaption { display: flex; align-items: center; gap: 10px; font-size: .85rem; color: #c4c9d4; }
+.quote-card figcaption b { color: var(--white); }
+.quote-avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--red); color: var(--white); font-family: var(--font-display); font-weight: 800; font-size: .72rem; }
 
 /* Faixa de elogios ------------------------------------------------------- */
 .praise { overflow: hidden; padding: 18px 0; border-top: 1px solid var(--line); background: rgba(255, 255, 255, .6); }
@@ -517,7 +524,7 @@ button { font: inherit; cursor: pointer; }
   .score-num { font-size: 3.6rem; }
   .g-logo-lg { width: 30px; height: 30px; }
   .quote-card { margin: -32px 12px 0; padding: 18px 20px; }
-  .quote-card blockquote { font-size: 1rem; }
+  .quote-card blockquote { font-size: 1rem; min-height: 0; }
 
   .praise { padding: 14px 0; }
   .praise-item { padding: 10px 16px 10px 12px; font-size: .92rem; }

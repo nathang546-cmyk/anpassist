@@ -97,7 +97,7 @@
   var avaliacoes = (G && G.avaliacoes || []).filter(function (r) { return r.nome && r.texto; });
 
   /* Mural de avaliações */
-  var CORES = ["#c8262c", "#1d2230", "#2f6f4f", "#8a4b1f", "#3b4a8f", "#6b2a5c"];
+  var CORES = ["#e3141b", "#1d2230", "#2f6f4f", "#8a4b1f", "#3b4a8f", "#6b2a5c"];
   function iniciais(nome) {
     var p = nome.trim().split(/\s+/);
     return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase();
@@ -138,19 +138,44 @@
     faixa.closest(".praise").hidden = true;
   }
 
-  /* Depoimento rotativo no hero */
+  /* Depoimentos girando no hero: todas as avaliações, com bolinhas para mostrar que há mais */
   var quote = document.querySelector("[data-quote]");
-  if (quote && curtas.length > 1 && !reduceMotion) {
-    var qi = 0, qTexto = quote.querySelector("blockquote"), qAutor = quote.querySelector("figcaption");
-    setInterval(function () {
+  var noHero = avaliacoes.filter(function (r) { return r.texto.length <= 220; });
+  if (quote && noHero.length) {
+    var qTexto = quote.querySelector("blockquote");
+    var qNome = quote.querySelector("figcaption b");
+    var qAvatar = quote.querySelector(".quote-avatar");
+    var qDots = quote.querySelector("[data-quote-dots]");
+    var qi = 0, qTimer = null;
+    function mostrar(n) {
+      qi = n;
+      qTexto.textContent = "“" + noHero[n].texto + "”";
+      qNome.textContent = noHero[n].nome;
+      qAvatar.textContent = iniciais(noHero[n].nome);
+      qAvatar.style.background = CORES[avaliacoes.indexOf(noHero[n]) % CORES.length];
+      qDots.querySelectorAll("button").forEach(function (b, k) { b.setAttribute("aria-current", String(k === n)); });
+    }
+    function trocar(n) {
       quote.classList.add("swap");
-      setTimeout(function () {
-        qi = (qi + 1) % curtas.length;
-        qTexto.textContent = "“" + curtas[qi].texto + "”";
-        qAutor.textContent = curtas[qi].nome + " · via Google";
-        quote.classList.remove("swap");
-      }, 450);
-    }, 5500);
+      setTimeout(function () { mostrar(n); quote.classList.remove("swap"); }, 400);
+    }
+    function iniciar() {
+      clearInterval(qTimer);
+      if (!reduceMotion && noHero.length > 1) qTimer = setInterval(function () { trocar((qi + 1) % noHero.length); }, 6000);
+    }
+    if (noHero.length > 1) {
+      noHero.forEach(function (r, k) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Depoimento " + (k + 1) + " de " + noHero.length);
+        b.addEventListener("click", function () { trocar(k); iniciar(); });
+        qDots.appendChild(b);
+      });
+    }
+    mostrar(0);
+    iniciar();
+    quote.addEventListener("mouseenter", function () { clearInterval(qTimer); });
+    quote.addEventListener("mouseleave", iniciar);
   }
 
   /* Animação de entrada */
