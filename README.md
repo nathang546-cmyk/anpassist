@@ -40,6 +40,18 @@ Sem a chave, o workflow apenas avisa e não muda nada. Os números continuam os 
 A distribuição por estrelas (141 de 5★, 1 de 4★) não vem da API: edite `distribuicao` em `data/google.js`
 quando quiser. Se ela não bater com o total, o site esconde o gráfico automaticamente para não mostrar número errado.
 
+## Marca
+
+A logo nova fica em `assets/img/logo/`:
+
+- `anp-logo.svg` / `anp-logo-branco.svg`: versão principal (ANP com "Assistência 24 horas" embaixo)
+- `anp-logo-horizontal.svg` / `-branco.svg`: versão para espaços baixos (usada no topo e no rodapé do site)
+- `anp-icone.svg` e `anp-icone-512.png`: ícone para WhatsApp, Google e redes sociais
+
+Cores: preto `#111214`, branco e vermelho `#E3141B` (só em detalhes).
+Os SVGs são gerados por `_referencias/gerar_marca.py`. O texto "Assistência 24 horas" usa a fonte Sora:
+para gráfica, a versão final precisa ter o texto convertido em curvas.
+
 ## Ver localmente
 
 ```bash
