@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_referencias/
+
+Sitemap: https://anpassistencia.com.br/sitemap.xml

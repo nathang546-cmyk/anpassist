@@ -1,0 +1,10 @@
+# Material interno (tabelas de preço, portfólio, arquivos de origem): não versionar
+_referencias/
+
+# Configuração local
+.claude/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
