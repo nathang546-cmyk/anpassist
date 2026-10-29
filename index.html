@@ -238,45 +238,89 @@
         <li class="step reveal"><span class="step-num">01</span><svg class="ic"><use href="#i-phone"/></svg><h3>O associado liga</h3><p>0800 ou WhatsApp, 24h.</p></li>
         <li class="step reveal"><span class="step-num">02</span><svg class="ic"><use href="#i-headset"/></svg><h3>A central atende</h3><p>Atendimento humanizado.</p></li>
         <li class="step reveal"><span class="step-num">03</span><svg class="ic"><use href="#i-truck"/></svg><h3>O prestador chega</h3><p>Rede em todo o Brasil.</p></li>
-        <li class="step reveal"><span class="step-num">04</span><svg class="ic"><use href="#i-check"/></svg><h3>Você acompanha</h3><p>Tudo em tempo real.</p></li>
+        <li class="step reveal"><span class="step-num">04</span><svg class="ic"><use href="#i-check"/></svg><h3>Todos acompanham</h3><p>Link ao vivo no WhatsApp.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- PLATAFORMA -->
-  <section class="section section-dark" id="plataforma">
+  <!-- ACOMPANHAMENTO: link ao vivo pelo WhatsApp -->
+  <section class="section section-paper" id="plataforma">
     <div class="container platform-layout">
       <div class="platform-copy reveal">
-        <span class="eyebrow eyebrow-dark">Plataforma do cliente</span>
-        <h2>Cada atendimento, ao vivo na sua tela.</h2>
+        <span class="eyebrow">Acompanhamento ao vivo</span>
+        <h2>Seu associado acompanha o socorro pelo WhatsApp.</h2>
+        <p>Assim que o chamado é aberto, ele recebe um link e vê o prestador chegando, como num app de entrega. Você acompanha tudo pela plataforma.</p>
         <ul class="feature-list">
+          <li><svg class="ic ic-fill"><use href="#i-whatsapp"/></svg>Link no WhatsApp</li>
           <li><svg class="ic"><use href="#i-activity"/></svg>Status em tempo real</li>
           <li><svg class="ic"><use href="#i-camera"/></svg>Fotos e notas fiscais</li>
-          <li><svg class="ic"><use href="#i-pin"/></svg>Mapa de acionamentos</li>
           <li><svg class="ic"><use href="#i-chart"/></svg>Pesquisa de satisfação</li>
           <li><svg class="ic"><use href="#i-file"/></svg>Relatórios gerenciais</li>
-          <li><svg class="ic"><use href="#i-bell"/></svg>Alertas de atendimento</li>
+          <li><svg class="ic"><use href="#i-pin"/></svg>Mapa de acionamentos</li>
         </ul>
       </div>
 
-      <div class="live-card reveal" role="img" aria-label="Demonstração: acompanhamento de um atendimento de reboque em tempo real">
-        <div class="live-head">
-          <div class="live-id"><span class="live-kicker">Atendimento</span><strong>#2026-04812</strong></div>
-          <span class="live-badge"><i></i>Ao vivo</span>
+      <div class="track-visual reveal" role="img" aria-label="Demonstração: o associado recebe um link pelo WhatsApp e acompanha o guincho chegando em tempo real">
+        <div class="wa-msg" aria-hidden="true">
+          <span class="wa-badge"><svg class="ic ic-fill"><use href="#i-whatsapp"/></svg></span>
+          <b>ANP Assistência 24h</b>
+          <p>Olá, João! O guincho já está a caminho. Acompanhe em tempo real:</p>
+          <span class="wa-link"><svg class="ic"><use href="#i-pin"/></svg>Acompanhar atendimento</span>
+          <time>14:06</time>
         </div>
-        <div class="live-meta">
-          <div><span>Serviço</span><strong>Reboque leve</strong></div>
-          <div><span>Veículo</span><strong>AAA-0A00</strong></div>
-          <div><span>Distância</span><strong>38 km</strong></div>
+
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="track-top">
+              <span class="track-brand">ANP</span>
+              <span class="track-live"><i></i>Ao vivo</span>
+            </div>
+
+            <svg class="track-map" viewBox="0 0 300 160">
+              <rect width="300" height="160" fill="#eceef1"/>
+              <g fill="#e1e4e8">
+                <rect x="8" y="8" width="42" height="24" rx="4"/><rect x="70" y="8" width="70" height="24" rx="4"/><rect x="160" y="8" width="70" height="24" rx="4"/><rect x="250" y="8" width="42" height="24" rx="4"/>
+                <rect x="8" y="50" width="42" height="40" rx="4"/><rect x="70" y="50" width="70" height="40" rx="4"/><rect x="160" y="50" width="70" height="40" rx="4"/><rect x="250" y="50" width="42" height="40" rx="4"/>
+                <rect x="8" y="110" width="42" height="30" rx="4"/><rect x="70" y="110" width="70" height="30" rx="4"/><rect x="160" y="110" width="70" height="30" rx="4"/><rect x="250" y="110" width="42" height="30" rx="4"/>
+              </g>
+              <g stroke="#fff" stroke-width="10" stroke-linecap="round">
+                <path d="M0 41H300M0 100H300M0 150H300M60 0V160M150 0V160M240 0V160"/>
+              </g>
+              <path d="M24 150H150V100H240V48" fill="none" stroke="#e3141b" stroke-opacity=".22" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="track-route" d="M24 150H150V100H240V48" fill="none" stroke="#e3141b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+              <g transform="translate(240 40)">
+                <circle r="16" fill="#e3141b" opacity=".15"/>
+                <circle r="8" fill="#e3141b"/><circle r="3" fill="#fff"/>
+              </g>
+              <g class="track-truck">
+                <circle r="12" fill="#111214"/>
+                <svg x="-7" y="-7" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-truck"/></svg>
+                <animateMotion dur="9s" repeatCount="indefinite" path="M24 150H150V100H240V54" keyPoints="0;1;1" keyTimes="0;.8;1" calcMode="linear"/>
+              </g>
+            </svg>
+
+            <div class="track-eta">
+              <small>Status do atendimento</small>
+              <strong data-eta-label>Chega em 12 min</strong>
+              <span class="track-bar"><span data-eta-bar></span></span>
+            </div>
+
+            <div class="track-driver">
+              <span class="track-avatar"><svg class="ic"><use href="#i-truck"/></svg></span>
+              <div><b>Guincho · Reboque leve</b><small>Placa AAA-0A00</small></div>
+              <span class="track-call"><svg class="ic"><use href="#i-phone"/></svg></span>
+            </div>
+
+            <ol class="track-steps" data-steps>
+              <li data-eta="Chamado recebido"><span class="dot"></span><b>Chamado recebido</b><time>14:02</time></li>
+              <li data-eta="Chega em 12 min"><span class="dot"></span><b>Prestador a caminho</b><time>14:06</time></li>
+              <li data-eta="Prestador no local"><span class="dot"></span><b>Prestador no local</b><time>14:18</time></li>
+              <li data-eta="Veículo entregue"><span class="dot"></span><b>Veículo entregue</b><time>15:10</time></li>
+              <li data-eta="Como foi o atendimento?"><span class="dot"></span><b>Avalie o atendimento</b><time>15:12</time></li>
+            </ol>
+          </div>
         </div>
-        <ol class="live-steps" data-steps>
-          <li><span class="dot"></span><div><b>Chamado recebido</b><small>0800 da sua associação</small></div><time>14:02</time></li>
-          <li><span class="dot"></span><div><b>Prestador acionado</b><small>A 2,1 km do local</small></div><time>14:04</time></li>
-          <li><span class="dot"></span><div><b>Prestador a caminho</b><small>Chega em 12 min</small><span class="bar"><span></span></span></div><time>14:06</time></li>
-          <li><span class="dot"></span><div><b>Veículo entregue</b><small>Fotos e NF anexadas</small></div><time>15:10</time></li>
-          <li><span class="dot"></span><div><b>Pesquisa de satisfação</b><small>Nota do associado</small></div><time>15:12</time></li>
-        </ol>
-        <p class="live-foot">Demonstração da plataforma</p>
+        <p class="track-note">Demonstração</p>
       </div>
     </div>
   </section>
@@ -385,6 +429,10 @@
         <details>
           <summary>Vocês atendem em todo o Brasil?</summary>
           <p>Sim. Há mais de 6 anos atendendo associações, com mais de 11.000 prestadores cadastrados.</p>
+        </details>
+        <details>
+          <summary>O associado consegue acompanhar o atendimento?</summary>
+          <p>Sim. Ele recebe pelo WhatsApp um link para acompanhar o prestador chegando, em tempo real.</p>
         </details>
         <details>
           <summary>Quais veículos são atendidos?</summary>

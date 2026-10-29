@@ -170,22 +170,30 @@
     reveals.forEach(function (r) { r.classList.add("in"); });
   }
 
-  /* Cartão "ao vivo" da plataforma: percorre as etapas do atendimento */
+  /* Celular do acompanhamento: percorre as etapas e atualiza o texto e a barra de progresso */
   var steps = document.querySelectorAll("[data-steps] li");
+  var etaLabel = document.querySelector("[data-eta-label]");
+  var etaBar = document.querySelector("[data-eta-bar]");
   if (steps.length) {
-    var atual = 2;
+    var atual = 1;
     function pintar() {
       steps.forEach(function (li, i) {
         li.classList.toggle("done", i < atual);
         li.classList.toggle("current", i === atual);
       });
+      var li = steps[Math.min(atual, steps.length - 1)];
+      if (etaLabel) etaLabel.textContent = li.dataset.eta;
+      if (etaBar) etaBar.style.width = Math.round((Math.min(atual, steps.length - 1) + 1) / steps.length * 100) + "%";
     }
     pintar();
-    if (!reduceMotion) {
+    if (reduceMotion) {
+      var mapa = document.querySelector(".track-map");
+      if (mapa && mapa.pauseAnimations) mapa.pauseAnimations();
+    } else {
       setInterval(function () {
-        atual = atual >= steps.length ? 0 : atual + 1;
+        atual = (atual + 1) % steps.length;
         pintar();
-      }, 3600);
+      }, 3200);
     }
   }
 
