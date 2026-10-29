@@ -141,7 +141,7 @@ button { font: inherit; cursor: pointer; }
 .site-header.scrolled { border-bottom-color: var(--line); box-shadow: 0 8px 24px -18px rgba(12, 14, 19, .35); }
 .header-inner { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
 .brand { display: flex; color: var(--ink); }
-.brand .logo { height: 46px; width: auto; display: block; }
+.brand .logo { height: 38px; width: auto; display: block; }
 .main-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .main-nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .95rem; color: #2a2e37; transition: background-color .2s, color .2s; }
 .main-nav a:hover { background: var(--paper); color: var(--text); }
@@ -408,7 +408,7 @@ button { font: inherit; cursor: pointer; }
 .site-footer { background: #08090c; color: var(--ink-muted); padding: 64px 0 0; font-size: .95rem; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1.2fr 1fr; gap: 40px; }
 .footer-brand { color: var(--white); }
-.footer-brand .logo { height: 46px; width: auto; display: block; margin-bottom: 16px; }
+.footer-brand .logo { height: 92px; width: auto; display: block; margin-bottom: 18px; }
 .footer-brand p { color: var(--ink-muted); }
 .site-footer h4 { color: var(--white); font-size: .95rem; margin-bottom: 14px; letter-spacing: 0; }
 .site-footer ul { display: grid; gap: 10px; }
@@ -492,7 +492,7 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 760px) {
   body { font-size: 16px; padding-bottom: 68px; }
   :root { --header-h: 64px; }
-  .brand .logo { height: 38px; }
+  .brand .logo { height: 32px; }
 
   .hero-ctas .btn { flex: 1 1 0; padding: 0 16px; }
   .hero-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }

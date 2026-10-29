@@ -45,7 +45,7 @@ quando quiser. Se ela não bater com o total, o site esconde o gráfico automati
 A logo nova fica em `assets/img/logo/`:
 
 - `anp-logo.svg` / `anp-logo-branco.svg`: versão principal (ANP com "Assistência 24 horas" embaixo)
-- `anp-logo-horizontal.svg` / `-branco.svg`: versão para espaços baixos (usada no topo e no rodapé do site)
+- `anp-logo-reduzida.svg` / `-branco.svg`: só o ANP com o traço, para espaços pequenos (usada no topo do site)
 - `anp-icone.svg` e `anp-icone-512.png`: ícone para WhatsApp, Google e redes sociais
 
 Cores: preto `#111214`, branco e vermelho `#E3141B` (só em detalhes).
