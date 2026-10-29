@@ -44,12 +44,12 @@ quando quiser. Se ela não bater com o total, o site esconde o gráfico automati
 
 A logo nova fica em `assets/img/logo/`:
 
-- `anp-logo.svg` / `anp-logo-branco.svg`: versão principal (ANP com "Assistência 24 horas" embaixo)
-- `anp-logo-reduzida.svg` / `-branco.svg`: só o ANP com o traço, para espaços pequenos (usada no topo do site)
+- `anp-logo.svg` / `anp-logo-branco.svg`: a logo (ANP com "Assistência 24h" embaixo), usada no topo e no rodapé.
+  O "Assistência 24h" fica sempre junto para não confundir com outras siglas ANP.
 - `anp-icone.svg` e `anp-icone-512.png`: ícone para WhatsApp, Google e redes sociais
 
 Cores: preto `#111214`, branco e vermelho `#E3141B` (só em detalhes).
-Os SVGs são gerados por `_referencias/gerar_marca.py`. O texto "Assistência 24 horas" usa a fonte Sora:
+Os SVGs são gerados por `_referencias/gerar_marca.py`. O texto "Assistência 24h" usa a fonte Sora:
 para gráfica, a versão final precisa ter o texto convertido em curvas.
 
 ## Ver localmente
