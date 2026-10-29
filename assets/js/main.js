@@ -170,10 +170,9 @@
     reveals.forEach(function (r) { r.classList.add("in"); });
   }
 
-  /* Celular do acompanhamento: percorre as etapas e atualiza o status e a barra de progresso */
+  /* Celular do acompanhamento: percorre as etapas e atualiza o status */
   var steps = document.querySelectorAll("[data-steps] li");
   var etaLabel = document.querySelector("[data-eta-label]");
-  var etaBar = document.querySelector("[data-eta-bar]");
   if (steps.length) {
     var atual = 1;
     function pintar() {
@@ -183,7 +182,6 @@
       });
       var li = steps[Math.min(atual, steps.length - 1)];
       if (etaLabel) etaLabel.textContent = li.dataset.eta;
-      if (etaBar) etaBar.style.width = Math.round((Math.min(atual, steps.length - 1) + 1) / steps.length * 100) + "%";
     }
     pintar();
     if (!reduceMotion) {
