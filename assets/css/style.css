@@ -184,6 +184,7 @@ button { font: inherit; cursor: pointer; }
 .hero-nums li { display: flex; flex-direction: column; line-height: 1.2; }
 .hero-nums b { font-family: var(--font-display); font-size: 1.6rem; color: var(--white); letter-spacing: -.02em; }
 .hero-nums span { color: var(--ink-muted); font-size: .9rem; }
+.hero-nums b small { font-size: .6em; font-weight: 700; color: #c4c9d4; letter-spacing: 0; }
 
 /* Nota no Google + depoimento rotativo */
 .hero-visual { position: relative; }
