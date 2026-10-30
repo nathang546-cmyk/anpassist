@@ -52,6 +52,15 @@ Cores: preto `#111214`, branco e vermelho `#E3141B` (só em detalhes).
 Os SVGs são gerados por `_referencias/gerar_marca.py`. O texto "Assistência 24h" usa a fonte Sora:
 para gráfica, a versão final precisa ter o texto convertido em curvas.
 
+## Fotos
+
+Provisórias, do banco gratuito Pexels (uso comercial liberado, sem obrigação de crédito). Trocar por fotos reais da ANP quando houver.
+
+- `assets/img/fotos/guincho-carregando.jpg` (topo do site): https://www.pexels.com/photo/17429097/ . O logo e o telefone de outra empresa nas costas do uniforme foram borrados.
+- `assets/img/fotos/prestador-corrente.jpg` (seção "Seja um prestador"): https://www.pexels.com/photo/17429095/
+
+Não usar as imagens do portfólio antigo: a foto do guincho tem marca d'água do Freepik (sem licença).
+
 ## Ver localmente
 
 ```bash
