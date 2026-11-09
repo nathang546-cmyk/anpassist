@@ -58,7 +58,7 @@
     if (nav.classList.contains("open") && !e.target.closest(".site-header")) setMenu(false);
   });
 
-  /* Google: nota, total, distribuição e avaliações (data/google.js) */
+  /* Google: nota, total e avaliações (data/google.js) */
   var G = window.ANP_GOOGLE;
   if (G) {
     var nota = Number(G.nota).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -66,33 +66,15 @@
     document.querySelectorAll('[data-g="nota"]').forEach(function (n) { n.textContent = nota; });
     document.querySelectorAll('[data-g="total"]').forEach(function (n) { n.textContent = total; });
 
-    // A distribuição é preenchida à mão; se o total mudou e ela não, escondemos para não mostrar número errado.
+    // A distribuição por estrelas é preenchida à mão; se o total mudou e ela não,
+    // escondemos a frase "141 de 142" para não mostrar número errado.
     var dist = G.distribuicao || {};
     var soma = [5, 4, 3, 2, 1].reduce(function (acc, k) { return acc + (dist[k] || 0); }, 0);
-    var histo = document.querySelector("[data-histo]");
-    var cinco = document.querySelector("[data-g-cinco]");
-    if (soma === G.total && soma > 0) {
-      if (histo) {
-        histo.innerHTML = "";
-        [5, 4, 3, 2, 1].forEach(function (k) {
-          var li = el("li");
-          var bar = el("i");
-          bar.style.setProperty("--w", ((dist[k] || 0) / soma * 100).toFixed(1) + "%");
-          li.appendChild(el("span", null, String(k)));
-          li.appendChild(bar);
-          li.appendChild(el("b", null, String(dist[k] || 0)));
-          histo.appendChild(li);
-        });
-      }
-      if (cinco) {
-        cinco.innerHTML = "";
-        cinco.appendChild(el("b", null, (dist[5] || 0).toLocaleString("pt-BR") + " de " + total));
-        cinco.appendChild(document.createTextNode(" com 5 estrelas."));
-      }
-    } else {
-      if (histo) histo.hidden = true;
-      if (cinco) cinco.hidden = true;
-    }
+    var bate = soma === G.total && soma > 0;
+    document.querySelectorAll("[data-g-cinco]").forEach(function (n) {
+      n.hidden = !bate;
+      if (bate) n.querySelector("b").textContent = (dist[5] || 0).toLocaleString("pt-BR") + " de " + total;
+    });
   }
   var avaliacoes = (G && G.avaliacoes || []).filter(function (r) { return r.nome && r.texto; });
 
@@ -120,24 +102,6 @@
     });
   }
 
-  /* Faixa de elogios em movimento: repete os itens até encher a tela, depois duplica para o loop */
-  var curtas = avaliacoes.filter(function (r) { return r.texto.length <= 120; });
-  var faixa = document.querySelector("[data-marquee]");
-  if (faixa && curtas.length) {
-    var base = [];
-    while (base.length < 8) base = base.concat(curtas);
-    base.concat(base).forEach(function (r, i) {
-      var item = el("div", "praise-item");
-      if (i >= base.length) item.setAttribute("aria-hidden", "true");
-      item.appendChild(estrelas(r.nota || 5));
-      item.appendChild(el("q", null, r.texto));
-      item.appendChild(el("small", null, r.nome));
-      faixa.appendChild(item);
-    });
-  } else if (faixa) {
-    faixa.closest(".praise").hidden = true;
-  }
-
   /* Depoimentos girando no hero: todas as avaliações, com bolinhas para mostrar que há mais */
   var quote = document.querySelector("[data-quote]");
   var noHero = avaliacoes.filter(function (r) { return r.texto.length <= 220; });
@@ -161,7 +125,7 @@
     }
     function iniciar() {
       clearInterval(qTimer);
-      if (!reduceMotion && noHero.length > 1) qTimer = setInterval(function () { trocar((qi + 1) % noHero.length); }, 6000);
+      if (!reduceMotion && noHero.length > 1) qTimer = setInterval(function () { trocar((qi + 1) % noHero.length); }, 7000);
     }
     if (noHero.length > 1) {
       noHero.forEach(function (r, k) {
@@ -213,7 +177,7 @@
       setInterval(function () {
         atual = (atual + 1) % steps.length;
         pintar();
-      }, 3200);
+      }, 4500);
     }
   }
 
@@ -244,6 +208,12 @@
         f.setAttribute("aria-invalid", String(vazio));
         if (vazio) { ok = false; primeiro = primeiro || f; }
       });
+      var email = form.querySelector('input[type="email"]');
+      if (email && email.value.trim() && !email.checkValidity()) {
+        email.classList.add("invalid");
+        email.setAttribute("aria-invalid", "true");
+        ok = false; primeiro = primeiro || email;
+      }
       erro.hidden = ok;
       if (!ok) { primeiro.focus(); return; }
 

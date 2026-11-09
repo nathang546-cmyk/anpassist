@@ -7,7 +7,8 @@ Prévia: https://nathang546-cmyk.github.io/anpassist/
 ## Estrutura
 
 ```
-index.html                    página única
+index.html                    página principal, voltada ao gestor de associação
+prestador.html                cadastro de prestadores (topo e rodapé iguais aos do index: ao mudar um, mude o outro)
 assets/css/style.css          estilos (cores e fontes no topo, em :root)
 assets/js/main.js             menu, animações, avaliações, formulários -> WhatsApp, vídeo
 data/google.js                nota, total e avaliações do Google (atualizado sozinho)
@@ -38,7 +39,7 @@ Para ligar, faça uma vez só:
 Sem a chave, o workflow apenas avisa e não muda nada. Os números continuam os do arquivo.
 
 A distribuição por estrelas (141 de 5★, 1 de 4★) não vem da API: edite `distribuicao` em `data/google.js`
-quando quiser. Se ela não bater com o total, o site esconde o gráfico automaticamente para não mostrar número errado.
+quando quiser. Se ela não bater com o total, o site esconde a frase "141 de 142" automaticamente para não mostrar número errado.
 
 ## Marca
 
@@ -62,11 +63,11 @@ Depois abra http://localhost:5180.
 
 ## Publicar no domínio
 
-Envie para a raiz do domínio: `index.html`, `robots.txt`, `sitemap.xml` e as pastas `assets/` e `data/`.
+Envie para a raiz do domínio: `index.html`, `prestador.html`, `robots.txt`, `sitemap.xml` e as pastas `assets/` e `data/`.
 Funciona em qualquer hospedagem (a atual, Hostinger, Netlify, Vercel, Cloudflare Pages ou o próprio GitHub Pages com domínio próprio).
 
 ## Outros ajustes
 
-- **WhatsApp**: o número fica em `assets/js/main.js` (`WHATSAPP`) e nos links `wa.me` do `index.html`.
+- **WhatsApp**: o número fica em `assets/js/main.js` (`WHATSAPP`) e nos links `wa.me` do `index.html` e do `prestador.html`.
 - **Formulários**: não precisam de servidor. Ao enviar, abrem o WhatsApp comercial com a mensagem já preenchida.
 - **Imagem de compartilhamento** (`assets/img/og-image.jpg`): mostra "142 avaliações" fixo; refaça quando o número mudar bastante.
